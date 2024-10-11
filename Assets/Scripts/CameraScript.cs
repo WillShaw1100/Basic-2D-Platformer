@@ -27,8 +27,7 @@ public class CameraScript : MonoBehaviour
         box_x1 = playerPos.x + boxSizeX;
         box_y0 = playerPos.y - boxSizeY;
         box_y1 = playerPos.y + boxSizeY;
-        Vector3 bottomLeft = thisCamera.ViewportToWorldPoint(new Vector3(0, 0,
-       0));
+        Vector3 bottomLeft = thisCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
         Vector3 topRight = thisCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
         screenX0 = bottomLeft.x;
         screenX1 = topRight.x;

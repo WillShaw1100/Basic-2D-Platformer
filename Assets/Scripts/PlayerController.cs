@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public float airControlMax = 2.5f;
 
     Vector2 boxExtents;
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +22,32 @@ public class PlayerController : MonoBehaviour
         // get the extent of the collision box
         boxExtents = GetComponent<BoxCollider2D>().bounds.extents;
 
+        // get the animator
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (rigidBody.velocity.x * transform.localScale.x < 0.0f)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
+            float xSpeed = Mathf.Abs(rigidBody.velocity.x);
+            animator.SetFloat("xspeed", xSpeed);
+
+            float ySpeed = rigidBody.velocity.y;
+            animator.SetFloat("yspeed", ySpeed);
+
+            float blinkVal = UnityEngine.Random.Range(0.0f, 200.0f);
+            if (blinkVal < 1.0f)
+                animator.SetTrigger("blinktrigger");
+
+
+
+
+        }
     }
 
     private void FixedUpdate()
