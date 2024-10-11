@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         if (rigidBody.velocity.x * transform.localScale.x < 0.0f)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
 
             float xSpeed = Mathf.Abs(rigidBody.velocity.x);
             animator.SetFloat("xspeed", xSpeed);
@@ -43,10 +44,10 @@ public class PlayerController : MonoBehaviour
 
             float blinkVal = UnityEngine.Random.Range(0.0f, 200.0f);
             if (blinkVal < 1.0f)
-                animator.SetTrigger("blinktrigger");
+                animator.SetTrigger("blinkTrigger");
 
 
-        }
+        
     }
 
     private void FixedUpdate()
