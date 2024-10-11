@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,10 +11,14 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 85.0f;
     public float airControlForce = 20.0f;
     public float airControlMax = 2.5f;
+    private int totalCoins = 0;
+    private int coinsCollected;
 
     Vector2 boxExtents;
     Animator animator;
     public AudioSource coinSound;
+    public TextMeshProUGUI scoreText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
         // get the animator
         animator = GetComponent<Animator>();
+
+        totalCoins = GameObject.FindGameObjectsWithTag("Coin").Length;
 
     }
 
@@ -46,8 +53,11 @@ public class PlayerController : MonoBehaviour
             if (blinkVal < 1.0f)
                 animator.SetTrigger("blinkTrigger");
 
+            string scoreStr = "Coins: " + coinsCollected + "/" + totalCoins;
+        scoreText.text = scoreStr;
 
-        
+
+
     }
 
     private void FixedUpdate()
@@ -85,6 +95,7 @@ public class PlayerController : MonoBehaviour
         {
             coinSound.Play();
             Destroy(coll.gameObject);
+            coinsCollected++;
         }
     }
 
