@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 boxExtents;
     Animator animator;
+    public AudioSource coinSound;
 
     // Start is called before the first frame update
     void Start()
@@ -43,8 +44,6 @@ public class PlayerController : MonoBehaviour
             float blinkVal = UnityEngine.Random.Range(0.0f, 200.0f);
             if (blinkVal < 1.0f)
                 animator.SetTrigger("blinktrigger");
-
-
 
 
         }
@@ -78,4 +77,15 @@ public class PlayerController : MonoBehaviour
                 rigidBody.AddForce(new Vector2(h * airControlForce, 0));
         }
     }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Coin")
+        {
+            coinSound.Play();
+            Destroy(coll.gameObject);
+        }
+    }
+
+
 }
